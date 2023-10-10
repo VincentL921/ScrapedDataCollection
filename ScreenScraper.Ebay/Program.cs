@@ -10,13 +10,9 @@ var driver = new ChromeDriver();
 driver.Url = "https://ebay.com";
 driver.Navigate();
 
-var searchBox = driver.FindElement(By.Id("gh-ac"));
-searchBox.SendKeys(searchTerm);
 new TextBoxComponent(driver).FindElement(By.Id("gh-ac")).SendKeys(searchTerm);
 
-var searchButton = driver.FindElement(By.Id("gh-btn"));
-searchButton.Click();
-new ClickComponent(driver).FindElement(By.Id("gh-btn")).Click();
+new ButtonComponent(driver).FindElement(By.Id("gh-btn")).Click();
 
 var resultsContainer = driver.FindElement(By.Id("srp-river-results"));
 //searchResults.GetAttribute("innerHTML");
