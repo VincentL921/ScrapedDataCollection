@@ -11,8 +11,8 @@ var searchTerm = "Aime Leon Dore New Balance";
 var driver = new ChromeDriver();
 driver.Url = "https://stadiumgoods.com";
 driver.Navigate();
-
-new TextBoxComponent(driver).FindElement(By.ClassName("ecp3x532 css-1almthv e53yhoa0")).Click();
+Thread.Sleep(1000);
+new TextBoxComponent(driver).FindElement(By.XPath(".//button[@data-test='desktopHeader-searchButton']")).Click();
 new TextBoxComponent(driver).FindElement(By.Id("search-input")).SendKeys(searchTerm);
 new Actions(driver).SendKeys(Keys.Enter);
 
