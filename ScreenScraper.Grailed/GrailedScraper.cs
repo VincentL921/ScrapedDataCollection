@@ -6,16 +6,16 @@ using ScreenScraper.Core.Components;
 
 namespace ScreenScraper.Grailed
 {
-	public class GrailedScraper : IScraper
-	{
-		public GrailedScraper()
-		{
-		}
+    public class GrailedScraper : IScraper
+    {
+        public GrailedScraper()
+        {
+        }
 
         public void Run(string searchTerm)
         {
             var driver = new ChromeDriver();
-            driver.Url = "https://grailed.com";
+            driver.Url = "https://www.grailed.com/shop/";
             driver.Navigate();
         }
     }

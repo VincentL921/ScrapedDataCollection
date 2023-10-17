@@ -11,5 +11,7 @@
     <ProjectReference Include="..\ScreenScraper.Ebay\ScreenScraper.Ebay.csproj" />
     <ProjectReference Include="..\ScreenScraper.Grailed\ScreenScraper.Grailed.csproj" />
     <ProjectReference Include="..\ScreenScraper.Core\ScreenScraper.Core.csproj" />
+    <ProjectReference Include="..\ScreenScraper.FlightClub\ScreenScraper.FlightClub.csproj" />
+    <ProjectReference Include="..\ScreenScraper.Bodega\ScreenScraper.Bodega.csproj" />
   </ItemGroup>
 </Project>

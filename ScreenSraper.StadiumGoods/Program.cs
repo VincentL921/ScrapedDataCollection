@@ -8,7 +8,7 @@ using ScreenScraper.Core.Components;
 var searchTerm = "Jordan 4";
 
 var driver = new ChromeDriver();
-driver.Url = "https://www.stadiumgoods.com/en-us/shopping?pageindex=1&query=";
+driver.Url = "https://www.stadiumgoods.com/en-us/shopping?pageindex=1&query=jordan";
 driver.Navigate();
 
 
@@ -19,3 +19,5 @@ driver.Navigate();
 
 
 Console.ReadLine();
+
+//Stadiumgoods had to get scrapped for now - their security blocked my access - VL 10/16/2023
