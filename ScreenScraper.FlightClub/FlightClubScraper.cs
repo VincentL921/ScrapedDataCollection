@@ -14,8 +14,9 @@ namespace ScreenScraper.FlightClub
 
         public void Run(string searchTerm)
         {
+            string encodedSearchTerm = Uri.EscapeDataString(searchTerm);
             var driver = new ChromeDriver();
-            driver.Url = "https://flightclub.com/catalogsearch/result?query=";
+            driver.Url = "https://flightclub.com/catalogsearch/result?query=" + encodedSearchTerm;
             driver.Navigate();
 
             //Some trial & error code i used before going the query route - VL 10/15/23

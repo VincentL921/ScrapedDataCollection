@@ -14,8 +14,9 @@ namespace ScreenScraper.Grailed
 
         public void Run(string searchTerm)
         {
+            string encodedSearchTerm = Uri.EscapeDataString(searchTerm);
             var driver = new ChromeDriver();
-            driver.Url = "https://www.grailed.com/shop/";
+            driver.Url = "https://www.grailed.com/shop/" + encodedSearchTerm;
             driver.Navigate();
         }
     }

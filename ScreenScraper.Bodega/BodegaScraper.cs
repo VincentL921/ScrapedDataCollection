@@ -15,8 +15,9 @@ namespace ScreenScraper.Bodega
 
 		public void Run(string searchTerm)
 		{
+            string encodedSearchTerm = Uri.EscapeDataString(searchTerm);
             var driver = new ChromeDriver();
-            driver.Url = "https://bdgastore.com/collections/search-results?q=";
+            driver.Url = "https://bdgastore.com/collections/search-results?q=" + encodedSearchTerm;
             driver.Navigate();
 
             //Some trial & error code i used before going the query route - VL 10/16/23
