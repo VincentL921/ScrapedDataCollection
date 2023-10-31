@@ -4,21 +4,22 @@ using ScreenScraper.Grailed;
 using ScreenScraper.FlightClub;
 using ScreenScraper.Bodega;
 
-var scrapers = new List<IScraper>();
-scrapers.Add(new EbayScraper());
-scrapers.Add(new GrailedScraper());
-scrapers.Add(new FlightClubScraper());
-scrapers.Add(new BodegaScraper());
+var scrapers = new Dictionary<string, IScraper>();
+scrapers.Add("ebay",new EbayScraper());
+scrapers.Add("grailed",new GrailedScraper());
+scrapers.Add("flight club",new FlightClubScraper());
+scrapers.Add("bodega",new BodegaScraper());
 
 //string[] siteNames = new string[]{"alibaba", "bodega", "ebay", "flight club", "grailed", "stockx", "stadium goods"};
-var siteNames = new List<string>();
-siteNames.Add("alibaba");
-siteNames.Add("bodega");
-siteNames.Add("ebay");
-siteNames.Add("flight club");
-siteNames.Add("grailed");
-siteNames.Add("stockx");
-siteNames.Add("stadium goods");
+//var siteNames = new List<string>();
+//siteNames.Add("alibaba");
+//siteNames.Add("bodega");
+//siteNames.Add("ebay");
+//siteNames.Add("flight club");
+//siteNames.Add("grailed");
+//siteNames.Add("stockx");
+//siteNames.Add("stadium goods");
+
 
 Console.WriteLine("Welcome to Data Scraper!");
 Console.WriteLine("What would you like to search today?");
@@ -43,30 +44,42 @@ var selectedSites = inputAsLower.Split(",");
 var isAllSupported = true;
 var unsupportedOptions = new List<string>();
 
+
+var acceptableSites = new List<string>();
+
 foreach (string item in selectedSites)
 {
     var trimmedItem = item.Trim();
-    var isSupported = siteNames.Any(m => m == trimmedItem);
+    var isSupported = scrapers.Any(m => m.Key == trimmedItem);
     if (isSupported == false)
     {
         isAllSupported = false;
         unsupportedOptions.Add(trimmedItem);
     }
-    Console.WriteLine(trimmedItem);
-
-while (isSupported == false)
+    else
     {
-        isAllSupported = false;
-        unsupportedOptions.Add(trimmedItem);
-        Console.WriteLine($"Warning: {unsupportedOptions} is not a supported scraper. Do you want to continue with the other selections? Yes or No?");
+        acceptableSites.Add(trimmedItem);
+    }
+}
+
+bool isAllUnsupported = selectedSites.Length == unsupportedOptions.Count;
+
+if (isAllUnsupported == true)
+{
+    Console.WriteLine("Welcome to Data Scraper!");
+    Console.WriteLine("What would you like to search today?");
+    Console.WriteLine($"Please enter sites with commas (type 'help' to see the list):");
+    userInput = Console.ReadLine();
+    inputAsLower = userInput.ToLower();
+}
+
+    while (isAllSupported == false)
+    {
+        Console.WriteLine($"Warning: {string.Join(',', unsupportedOptions)} is not a supported scraper. Do you want to continue with the other selections? Yes or No?");
         string userResponse = Console.ReadLine();
         string responseAsLower = userResponse.ToLower();
 
-        if (responseAsLower == "yes")
-        {
-            Console.WriteLine(trimmedItem);
-        }
-        else if (responseAsLower == "no")
+        if (responseAsLower == "no")
         {
             Console.WriteLine("Welcome to Data Scraper!");
             Console.WriteLine("What would you like to search today?");
@@ -75,19 +88,17 @@ while (isSupported == false)
             userInput = Console.ReadLine();
             inputAsLower = userInput.ToLower();
         }
-    }
+        else if (responseAsLower == "yes")
+        {
+            isAllSupported = true;
+        }
 
-while (userInput != trimmedItem)
-    {
-        Console.WriteLine($"Warning: your input is invalid. Please try again:");
-        Console.WriteLine("Welcome to Data Scraper!");
-        Console.WriteLine("What would you like to search today?");
-        Console.WriteLine($"Please enter sites with commas (type 'help' to see the list):");
-        Console.WriteLine("Please provide supported sites");
-        userInput = Console.ReadLine();
-        inputAsLower = userInput.ToLower();
     }
-
+    
+foreach (string aItem in acceptableSites)
+{
+    var scraper = scrapers[aItem];
+    scraper.Run("Nike Air Max 95");
 }
 
 
